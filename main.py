@@ -207,12 +207,16 @@ def main():
     returning a response to the user from the handler function.
     """
     while True:
-
-        user_input = (
-            input("Enter your command (enter 'exit' or 'close' to stop): ")
-            .strip()
-            .lower()
+        try:
+            user_input = (
+                input("Enter your command (enter 'exit' or 'close' to stop): ")
+                .strip()
+                .lower()
         )
+        except EOFError as ef:
+            print(ef)
+            user_input = "exit"
+
         command, *args = parse_input(user_input)
 
         # Command handler functions - Responsible for the direct execution of commands.
